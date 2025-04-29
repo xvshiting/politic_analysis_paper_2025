@@ -9,11 +9,11 @@ We have two code files:`province.ipynb` and `country.ipynb` all stored in root d
 
 These code should be runing under jupyterlab or notebook editors.
 
-##output
+## output
 
 Some vital results are stored in `output` directory.
 
-##others 
+## others 
 
 - stopwords
 - font
