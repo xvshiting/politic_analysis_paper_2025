@@ -1,7 +1,7 @@
 # politic_analysis_paper_2025
 
 ## Data
-All raw data are store in the `data` directory.
+All raw data are stored in the `data` directory.
 
 ## Code
 
