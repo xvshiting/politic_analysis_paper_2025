@@ -1,3 +1,14 @@
+import os 
+import pandas as pd
+import seaborn as sns
+import spacy
+import numpy as np
+from collections import Counter
+import os
+from tqdm import notebook
+import tqdm 
+
+nlp = spacy.load("zh_core_web_md")
 def init_dir(dir_path):
     if os.path.exists(dir_path):
         print("dir exists!")
@@ -26,6 +37,11 @@ def get_paragraphs(text_list,
     ind = 0
     for text, d, pro in zip(text_list, date_list, province_list):
         # print(pro)
+        try:
+            d = d.split("/")[0] #year
+            d = int(d)
+        except :
+            d = 9999
         paras = text.split("\n")
         for p in paras:
             p = p.strip()
@@ -34,7 +50,7 @@ def get_paragraphs(text_list,
         ind += 1
     return paragraphs
 
-def build_corpus(paragraphs):
+def build_corpus(paragraphs, all_holder):
     removal = set(['ADV','PRON','CCONJ','PUNCT','PART','DET','ADP','SPACE', 'NUM', 'SYM'])
     ret = []
     for para in  tqdm.tqdm(paragraphs):

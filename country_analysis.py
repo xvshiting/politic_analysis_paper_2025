@@ -6,7 +6,6 @@ from collections import Counter
 import os
 import wordcloud
 from PIL import Image
-import numpy as np
 from gensim.corpora.dictionary import Dictionary
 from gensim.models import LdaMulticore
 from gensim.models import CoherenceModel
@@ -27,14 +26,14 @@ raw_xlsx_path = "./data/Policies Data.xlsx"
 df_sd = pd.read_excel(raw_xlsx_path, sheet_name="Central Policies Table")
 df_all = pd.concat([df_sd])
 
-CONTENT_LABEL_STR = "content"
-YEAR_LABEL_STR = "year"
+CONTENT_LABEL_STR = "Policy Content"
+YEAR_LABEL_STR = "Release Time"
 PROVINCE_LABEL_STR = "province"
 WORD_STR = "word"
 FREQUENCY_STR = "frequency"
 text_list = df_all[CONTENT_LABEL_STR].to_list()
 date_list = df_all[YEAR_LABEL_STR].to_list()
-province_list = df_all[PROVINCE_LABEL_STR].to_list()
+province_list = ["国家"]*len(text_list) #df_all[PROVINCE_LABEL_STR].to_list()
 text_list = [ clean_text(text) for text in text_list]
 stop_word_set = load_stop_words()
 all_holder.stop_word_set = stop_word_set
@@ -47,7 +46,7 @@ if os.path.exists(corpus_path):
     corpus = pk.load(open(corpus_path, "rb"))
 else:
     paragraphs = get_paragraphs(text_list, date_list, province_list)
-    corpus = build_corpus(paragraphs)
+    corpus = build_corpus(paragraphs, all_holder)
     pk.dump(corpus, open(corpus_path, "wb"))
 all_holder.corpus = corpus
 all_holder.paragraphs = paragraphs
