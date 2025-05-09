@@ -1,7 +1,11 @@
 # politic_analysis_paper_2025
 
 ## Data
+
 All raw data are stored in the `data` directory.
+
+>
+The "Policy Content" in the raw data contains policy documents issued by the Chinese central government and the Shandong provincial government. This study conducted text preprocessing on the contents in this column to create a corpus of policy textual data. We have already translated other fields in the data files into English, but the "Policy Content" has remained in its original Chinese form, as translating it might affect the results of the policy topic modeling.
 
 ## Code
 
